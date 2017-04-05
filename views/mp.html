@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <title>Pxb</title>
+    <script
+      src="https://code.jquery.com/jquery-1.12.3.min.js"
+      integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
+      crossorigin="anonymous"></script>
+      <script src = "/assets/postit.js"></script>
+    <link href="/assets/styles.css" rel ="stylesheet" type="text/css"/>
+  <body>
+    <nav>
+      <ul>
+        <li></li>
+        <li><a href="pxb">Pixel Bulletin Board</a></li>
+        <li><a href="#msvis">Music Visualizer</a></li>
+        <li><a href="fbubb">Floating Bubbles</a></li>
+        <li><a href="about">About</a></li>
+      </ul>
+    </nav>
+</head>
+<cool>
+<ok>
+<canvas id="myCanvas" width="1000" height="300" style="border:1px solid #d3d3d3;">
+  Your browser does not support the HTML5 canvas tag.</canvas>
+
+</ok>
+</cool>
+</body>
+<style>
+
+#canvas{
+
+
+}
+ok{
+  position: absolute;
+
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+cool{
+
+}
+canvas{
+  margin: auto;
+}
+</style>
+
+
+<script>
+  // define variables
+var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+var source = audioCtx.createBufferSource();
+var freqDomain;
+var analyser = audioCtx.createAnalyser();
+
+
+// use XHR to load an audio track, and
+// decodeAudioData to decode it and stick it in a buffer.
+// Then we put the buffer into the source
+
+var request = new XMLHttpRequest();
+
+request.open('GET', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/350016/Balla.wav', true);
+
+request.responseType = 'arraybuffer';
+
+request.onload = function() {
+  var audioData = request.response;
+
+  audioCtx.decodeAudioData(audioData, function(decodedData) {
+      source.buffer = decodedData;
+
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      source.loop = false;
+
+    },
+
+    function(e) {
+      "Error with decoding audio data" + e.err;
+    });
+
+}
+
+request.send();
+source.start(0);
+
+source.onended;
+analyser.fftSize = 2048;
+var bufferLength = analyser.frequencyBinCount;
+console.log(bufferLength);
+var dataArray = new Uint8Array(bufferLength);
+analyser.getByteTimeDomainData(dataArray);
+
+// draw an oscilloscope of the current audio source
+
+var c = document.getElementById("myCanvas");
+var canvasCtx = c.getContext("2d");
+
+var WIDTH = 1000;
+var HEIGHT = 300;
+var melody = [];
+
+function draw() {
+
+  requestAnimationFrame(draw);
+
+  analyser.getByteFrequencyData(dataArray);
+
+  canvasCtx.fillStyle = 'rgb(100, 300, 200)';
+  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  canvasCtx.lineWidth = 2;
+  canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+
+  canvasCtx.beginPath();
+
+  var barWidth = (WIDTH / bufferLength) * 2;
+  var barHeight;
+  var x = 0;
+  var color;
+
+  melody.push((8000 / bufferLength) * indexOfMax(dataArray));
+
+  for (var i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i] * 3;
+    canvasCtx.fillStyle = 'rgb(150,50,50)';
+    canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight);
+    //melody.push(Math. max. apply(null, dataArray));
+    x += barWidth + 1;
+
+  };
+
+};
+console.log(melody);
+draw();
+
+
+function indexOfMax(arr) {
+  if (arr.length === 0) {
+    return -1;
+  }
+
+  var max = arr[0];
+  var maxIndex = 0;
+
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] > max) {
+      maxIndex = i;
+      max = arr[i];
+    }
+  }
+
+  return maxIndex;
+}
+</script>
+</html>

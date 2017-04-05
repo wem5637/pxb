@@ -1,0 +1,120 @@
+
+
+maker.hidden {
+display: none;
+}
+
+ul2 {
+  width: 170px;
+  height: 130px;
+  display: inline-block;
+  margin: auto;
+  style: block;
+  padding: 0px;
+
+}
+ul1 {
+  width: 605px;
+  height: 605px;
+  display: inline-block;
+  margin: auto;
+  style: block;
+  padding: .5px;
+}
+lit{
+  width: 10px;
+  height: 10px;
+  background-color:silver;
+  display: inline-block;
+  padding: 5px;
+  margin-bottom: 1px;
+  margin-right: 1px;
+}
+
+lit.blue{
+  background-color:blue;
+}
+
+lis{
+  width: 5px;
+  height: 5px;
+  background-color:rgb(150,50,50);
+  display: inline-block;
+  padding: .5px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+lis.blue{
+  background-color:rgb(100, 300, 200);
+}
+
+container{
+  width: 100%;
+  height:100%;
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+}
+maker{
+background-color:white;
+margin-top: 50px;
+height: 500px;
+width: 620px;
+left: 30%;
+position: absolute;
+border-style: ridge;
+text-align: center;
+}
+body{
+  display:flex;
+}
+
+
+nav {
+    width: 100%;
+    height: 50px;
+    position:fixed;
+    top: 0;
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+nav:before {
+  display:block;
+  position: absolute;
+}
+nav ul {
+  position: relative;
+  margin: 0;
+  z-index: 2;
+  text-transform: uppercase;
+  text-align: center;
+}
+nav ul li {
+  display: inline-block;
+  padding: 1.35em 0;
+  margin-right: 3em;
+  font-size: 0.9em;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 0.9em;
+}
+.button{
+  display: inline-block;
+}
+butt{
+margin: auto;
+display: inline-block;\
+width: 100%;
+}
+form{
+  display: inline-block;
+}

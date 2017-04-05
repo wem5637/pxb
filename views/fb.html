@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <title>Pxb</title>
+    <script
+      src="https://code.jquery.com/jquery-1.12.3.min.js"
+      integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
+      crossorigin="anonymous"></script>
+      <script src = "/assets/postit.js"></script>
+    <link href="/assets/styles.css" rel ="stylesheet" type="text/css"/>
+    <nav>
+      <ul>
+        <li></li>
+        <li><a href="pxb">Pixel Bulletin Board</a></li>
+        <li><a href="msvis">Music Visualizer</a></li>
+        <li><a href="#fbubb">Floating Bubbles</a></li>
+        <li><a href="about">About</a></li>
+      </ul>
+    </nav>
+</head>
+
+
+
+<div id ="myContainer">
+<div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+ <div id="circle"></div>
+
+
+</div>
+
+<style>
+#myContainer {
+  width: 100%;
+  height: 110px;
+  margin: auto;
+
+
+}
+
+#circle {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background-color: pink;
+  border-radius: 100% 100% 100% 10%;
+}
+
+nav {
+    width: 100%;
+    height: 50px;
+    position:fixed;
+    top: 0;
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+nav:before {
+  display:block;
+  position: absolute;
+}
+nav ul {
+  position: relative;
+  margin: 0;
+  z-index: 2;
+  text-transform: uppercase;
+  text-align: center;
+}
+nav ul li {
+  display: inline-block;
+  padding: 1.35em 0;
+  margin-right: 3em;
+  font-size: 0.9em;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 0.9em;
+}
+.button{
+  display: inline-block;
+}
+
+canvas{
+  margin-top: 150px;
+  position: absolute;
+  background-color: black;
+}
+</style>
+<script>
+var width = $('#myContainer').width(); 
+
+var movealoove = function(num) {
+   var top = 200 * (Math.random());
+   var elem = $('#circle:nth-child(' + num + ')');
+   elem.css('background-color', 'hsl(' + top + ',100%,70%)');
+   var pos = Math.floor(Math.random() * width);
+   var id = setInterval(frame, 10);
+   var inc = 1;
+   if (i % 2 == 0) {
+     inc = -1
+   }
+   elem.css('top', (top+60)+ 'px');
+
+   function frame() {
+     if (pos === Math.floor(width)-25) {
+       inc = -1;
+       pos = pos + inc;
+     } else if (pos === 0) {
+       inc = 1;
+       pos = pos + inc;
+     } else {
+       pos = pos + inc;
+       elem.css('left', pos + 'px');
+     }
+   }
+ }
+
+ for (i = 1; i < 21; i++) {
+   movealoove(i);
+ }
+</script>

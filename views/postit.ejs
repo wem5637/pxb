@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Pxb</title>
+    <script
+      src="https://code.jquery.com/jquery-1.12.3.min.js"
+      integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
+      crossorigin="anonymous"></script>
+      <script src = "/assets/postit.js"></script>
+    <link href="/assets/styles.css" rel ="stylesheet" type="text/css"/>
+<script src="https://github.com/mde/ejs/releases/download/v2.5.5/ejs.js"></script>
+</head>
+
+<nav>
+  <ul>
+    <li><button id="hide">Hide/Show Maker</button></li>
+    <li><a href="pxb">Pixel Bulletin Board</a></li>
+    <li><a href="msvis">Music Visualizer</a></li>
+    <li><a href="fbubb">Floating Bubbles</a></li>
+    <li><a href="about">About</a></li>
+  </ul>
+</nav>
+
+<maker id="extraControls" class="hidden">
+<butt>
+
+    <form>
+    <button class="submitbut" type="submit">Post pxb</button>
+    </form>
+    <button id="clear">Clear</button>
+</butt>
+    <ul1>
+
+      <lit>
+        <% for(var i =0; i<587; i++){ %>
+      </lit><lit>
+        <% } %>
+      </lit>
+    </ul1>
+</maker>
+  <body>
+<container id="wrapper">
+<%var z=0;%>
+<% for(var i =0; i<todos.length; i++){ %>
+    <ul2>
+      <lis>
+        <% for(var k =0; k<587; k++){ %>
+      </lis><lis>
+        <% } %>
+      </lis>
+
+    </ul2>
+    <script>
+    if (!q){var q=0};
+    <%z=todos.length-i-1;%>
+    var ok = ejs.render('<%=todos[(z)].item;%>')
+
+    var i = ejs.render('<%=i;%>')
+    ok=JSON.parse(ok);
+    i=JSON.parse(i);
+    for(j=0;j<ok.length;j++){
+        if(ok[j]===1){$("ul2 lis:eq("+(q+j)+")").toggleClass("blue");}
+    }
+    q=q+588;
+
+
+    if(i===80){
+      var item = JSON.stringify(ok);
+      console.log("delete request")
+      $.ajax({
+        type: 'DELETE',
+        url: '/' + item,
+        success: function(data){
+          //do something with the data via front-end framework
+        }
+      });
+
+  }
+    </script>
+
+    <% } %>
+
+  </container>
+</body>
+</html>
